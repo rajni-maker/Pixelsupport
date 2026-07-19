@@ -33,7 +33,9 @@ export default async function TicketDetailPage({
     await Promise.all([
       supabase
         .from("tickets")
-        .select("id, subject, description, status, priority, created_at")
+        .select(
+          "id, subject, description, status, priority, created_at, ai_summary, category, ai_suggested_tags",
+        )
         .eq("id", id)
         .single(),
       supabase.from("profiles").select("role").eq("id", user.id).single(),
@@ -88,6 +90,36 @@ export default async function TicketDetailPage({
               ticketId={ticket.id}
               current={ticket.status as TicketStatus}
             />
+          </div>
+        )}
+
+        {/* AI summary panel — shown once triage has run on this ticket */}
+        {ticket.ai_summary && (
+          <div className="mt-6 rounded-2xl bg-indigo-50 p-5 ring-1 ring-indigo-200">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-semibold text-indigo-900">
+                ✨ AI summary
+              </span>
+              {ticket.category && (
+                <span className="rounded-full bg-white px-2.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-200">
+                  {ticket.category}
+                </span>
+              )}
+            </div>
+            <p className="mt-2 text-sm text-indigo-900">{ticket.ai_summary}</p>
+            {ticket.ai_suggested_tags &&
+              ticket.ai_suggested_tags.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {ticket.ai_suggested_tags.map((tag: string) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-white px-2 py-0.5 text-xs text-indigo-600 ring-1 ring-inset ring-indigo-200"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
           </div>
         )}
 

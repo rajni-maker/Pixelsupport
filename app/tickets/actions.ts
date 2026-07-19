@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { triageTicket } from "@/lib/anthropic";
 import {
   PRIORITY_OPTIONS,
   STATUS_OPTIONS,
@@ -42,16 +43,38 @@ export async function createTicket(
 
   if (!profile) return { error: "Could not find your profile." };
 
-  const { error } = await supabase.from("tickets").insert({
-    organization_id: profile.organization_id,
-    client_id: user.id,
-    subject,
-    description: description || null,
-    priority,
-    // status defaults to 'open' in the database
-  });
+  const { data: inserted, error } = await supabase
+    .from("tickets")
+    .insert({
+      organization_id: profile.organization_id,
+      client_id: user.id,
+      subject,
+      description: description || null,
+      priority,
+      // status defaults to 'open' in the database
+    })
+    .select("id")
+    .single();
 
   if (error) return { error: error.message };
+
+  // AI triage (best-effort): summarize + suggest a category/tags. If the AI
+  // call fails or no key is set, the ticket is already created — we just skip.
+  if (inserted && process.env.ANTHROPIC_API_KEY) {
+    try {
+      const t = await triageTicket(subject, description);
+      await supabase
+        .from("tickets")
+        .update({
+          ai_summary: t.summary,
+          category: t.category,
+          ai_suggested_tags: t.tags,
+        })
+        .eq("id", inserted.id);
+    } catch {
+      // ignore — triage is a nice-to-have, not required to create a ticket
+    }
+  }
 
   revalidatePath("/tickets");
   redirect("/tickets");

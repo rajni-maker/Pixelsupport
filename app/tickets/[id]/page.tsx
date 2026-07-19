@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import AppHeader from "@/components/AppHeader";
+import ReplyForm from "./ReplyForm";
+import StatusControl from "./StatusControl";
 import {
   STATUS_LABELS,
   STATUS_STYLES,
@@ -25,14 +27,27 @@ export default async function TicketDetailPage({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
+  // Load the ticket, the current user's role, and the message thread together.
   // RLS ensures a user can only load a ticket they're allowed to see.
-  const { data: ticket } = await supabase
-    .from("tickets")
-    .select("id, subject, description, status, priority, created_at")
-    .eq("id", id)
-    .single();
+  const [{ data: ticket }, { data: profile }, { data: messages }] =
+    await Promise.all([
+      supabase
+        .from("tickets")
+        .select("id, subject, description, status, priority, created_at")
+        .eq("id", id)
+        .single(),
+      supabase.from("profiles").select("role").eq("id", user.id).single(),
+      supabase
+        .from("ticket_messages")
+        .select("id, body, sender_role, created_at")
+        .eq("ticket_id", id)
+        .order("created_at", { ascending: true }),
+    ]);
 
   if (!ticket) notFound();
+
+  const canChangeStatus =
+    profile?.role === "admin" || profile?.role === "agent";
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -63,6 +78,20 @@ export default async function TicketDetailPage({
           Opened {formatDateTime(ticket.created_at)}
         </p>
 
+        {/* Status control — only for admins/agents */}
+        {canChangeStatus && (
+          <div className="mt-4 flex items-center gap-3 rounded-xl bg-white p-4 ring-1 ring-gray-200">
+            <span className="text-sm font-medium text-gray-700">
+              Change status:
+            </span>
+            <StatusControl
+              ticketId={ticket.id}
+              current={ticket.status as TicketStatus}
+            />
+          </div>
+        )}
+
+        {/* Original ticket description */}
         <div className="mt-6 rounded-2xl bg-white p-6 ring-1 ring-gray-200">
           {ticket.description ? (
             <p className="whitespace-pre-wrap text-sm text-gray-700">
@@ -75,11 +104,37 @@ export default async function TicketDetailPage({
           )}
         </div>
 
-        <div className="mt-6 rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center">
-          <p className="text-sm text-gray-500">
-            Replies and status changes are coming next.
-          </p>
-        </div>
+        {/* Message thread */}
+        <h2 className="mt-8 text-sm font-semibold text-gray-900">
+          Conversation
+        </h2>
+        {messages && messages.length > 0 ? (
+          <ul className="mt-3 space-y-3">
+            {messages.map((m) => (
+              <li
+                key={m.id}
+                className="rounded-xl bg-white p-4 ring-1 ring-gray-200"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium capitalize text-gray-700">
+                    {m.sender_role ?? "user"}
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    {formatDateTime(m.created_at)}
+                  </span>
+                </div>
+                <p className="mt-1 whitespace-pre-wrap text-sm text-gray-700">
+                  {m.body}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-3 text-sm text-gray-400">No replies yet.</p>
+        )}
+
+        {/* Reply box */}
+        <ReplyForm ticketId={ticket.id} />
       </div>
     </main>
   );

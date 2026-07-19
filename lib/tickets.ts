@@ -50,6 +50,16 @@ export const PRIORITY_OPTIONS: TicketPriority[] = [
   "urgent",
 ];
 
+// Order used to populate the status dropdown on the ticket detail page.
+export const STATUS_OPTIONS: TicketStatus[] = [
+  "open",
+  "in_progress",
+  "waiting_on_client",
+  "testing",
+  "resolved",
+  "closed",
+];
+
 // Format a timestamp as date + time, e.g. "Jul 19, 2026, 3:45 PM".
 export function formatDateTime(iso: string) {
   return new Date(iso).toLocaleString("en-US", {

@@ -7,14 +7,12 @@ import {
   Bot,
   Ticket,
   Users,
-  BarChart3,
   ArrowRight,
   Play,
   Check,
   MessageSquare,
   Sparkles,
   Layers,
-  Lock,
   Mail,
   // lucide v1 dropped brand icons (Github/Twitter), so the social links use
   // neutral equivalents with accessible labels.
@@ -199,7 +197,7 @@ function HeroSection() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm font-medium mb-8"
           >
             <Sparkles className="w-4 h-4" />
-            AI-Powered Support Platform
+            Built for Agencies
           </motion.div>
 
           <motion.h1
@@ -209,11 +207,11 @@ function HeroSection() {
             className="text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6"
           >
             <span className="bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent">
-              One Workspace
+              One Workspace.
             </span>
             <br />
             <span className="bg-gradient-to-r from-purple-400 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
-              Every Conversation
+              Every Conversation.
             </span>
           </motion.h1>
 
@@ -223,8 +221,9 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg text-slate-400 max-w-xl mb-10 leading-relaxed"
           >
-            Manage support for multiple client companies with AI-assisted ticketing, 
-            smart summaries and faster team collaboration.
+            Manage support for multiple client companies with AI-assisted
+            ticketing, smart summaries, Slack notifications, and faster
+            resolutions&mdash;all from a single workspace.
           </motion.p>
 
           <motion.div
@@ -298,7 +297,7 @@ function HeroSection() {
                 <Building2 className="w-5 h-5 text-white" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">RDT</p>
+                <p className="text-sm font-semibold text-white">Ashoka University</p>
                 <p className="text-xs text-slate-400">12 tickets</p>
               </div>
             </div>
@@ -322,7 +321,7 @@ function HeroSection() {
                 <Building2 className="w-5 h-5 text-white" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">Aesthetix</p>
+                <p className="text-sm font-semibold text-white">NamanHR</p>
                 <p className="text-xs text-slate-400">5 tickets</p>
               </div>
             </div>
@@ -432,14 +431,50 @@ function HeroSection() {
    HOW IT WORKS SECTION
    ─────────────────────────────────────────── */
 function HowItWorksSection() {
+  // Label and description live together so the two can't drift apart.
   const steps = [
-    { icon: Layers, label: "Organization", color: "from-purple-500 to-violet-500" },
-    { icon: Building2, label: "Client Company", color: "from-orange-500 to-amber-500" },
-    { icon: Ticket, label: "Ticket Created", color: "from-rose-500 to-pink-500" },
-    { icon: Sparkles, label: "AI Summary", color: "from-cyan-500 to-blue-500" },
-    { icon: Users, label: "Support Rep", color: "from-emerald-500 to-teal-500" },
-    { icon: Check, label: "Manager Approval", color: "from-indigo-500 to-purple-500" },
-    { icon: MessageSquare, label: "Customer Reply", color: "from-violet-500 to-fuchsia-500" },
+    {
+      icon: Layers,
+      label: "Organization",
+      desc: "Your agency workspace",
+      color: "from-purple-500 to-violet-500",
+    },
+    {
+      icon: Building2,
+      label: "Client Company",
+      desc: "Your customer organization",
+      color: "from-orange-500 to-amber-500",
+    },
+    {
+      icon: Ticket,
+      label: "Ticket Created",
+      desc: "Support request received",
+      color: "from-rose-500 to-pink-500",
+    },
+    {
+      icon: MessageCircle,
+      label: "Slack Notification",
+      desc: "Your team is alerted in real time",
+      color: "from-amber-400 to-yellow-500",
+    },
+    {
+      icon: Sparkles,
+      label: "AI Summary",
+      desc: "Issue analyzed instantly",
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      icon: Check,
+      label: "Support Review",
+      desc: "Review & edit AI draft",
+      color: "from-emerald-500 to-teal-500",
+    },
+    {
+      icon: MessageSquare,
+      label: "Reply Sent",
+      desc: "Response delivered to client",
+      color: "from-violet-500 to-fuchsia-500",
+    },
   ];
 
   return (
@@ -474,15 +509,7 @@ function HowItWorksSection() {
               >
                 <div className={`flex-1 ${i % 2 === 0 ? "md:text-right" : "md:text-left"} text-center`}>
                   <h3 className="text-lg font-semibold text-white mb-1">{step.label}</h3>
-                  <p className="text-sm text-slate-500">
-                    {i === 0 && "Your agency workspace"}
-                    {i === 1 && "A client under your management"}
-                    {i === 2 && "Customer submits a support request"}
-                    {i === 3 && "AI analyzes and summarizes instantly"}
-                    {i === 4 && "Assigned to the right team member"}
-                    {i === 5 && "Human review before sending"}
-                    {i === 6 && "Customer receives the solution"}
-                  </p>
+                  <p className="text-sm text-slate-500">{step.desc}</p>
                 </div>
 
                 <div className="relative z-10">
@@ -512,42 +539,42 @@ function FeaturesSection() {
     {
       icon: Sparkles,
       title: "AI Ticket Summary",
-      description: "Automatically summarize long tickets into actionable insights. AI reads the full context so your team doesn't have to.",
+      description: "Automatically summarize support requests into concise insights so your team understands the issue instantly.",
       color: "from-purple-500 to-violet-600",
       glow: "shadow-purple-500/20",
     },
     {
       icon: Users,
       title: "Smart Assignment",
-      description: "Route tickets to the right support rep based on expertise, workload and past performance. No more manual triage.",
+      description: "Assign tickets to the right support representative for faster resolution.",
       color: "from-cyan-500 to-blue-600",
       glow: "shadow-cyan-500/20",
     },
     {
       icon: MessageSquare,
-      title: "Draft Replies",
-      description: "AI suggests complete responses that match your tone. Reps review, edit and approve — never send blindly.",
+      title: "AI Draft Replies",
+      description: "Generate contextual reply drafts that your support team can review, edit, and send.",
       color: "from-emerald-500 to-teal-600",
       glow: "shadow-emerald-500/20",
     },
     {
       icon: Layers,
-      title: "Multi-company Workspace",
-      description: "Manage dozens of client companies from one dashboard. Each company gets its own tickets, contacts and branding.",
+      title: "Multi-Company Workspace",
+      description: "Manage multiple client companies from a single organization dashboard.",
       color: "from-orange-500 to-amber-600",
       glow: "shadow-orange-500/20",
     },
     {
-      icon: BarChart3,
-      title: "Support Analytics",
-      description: "Track resolution times, CSAT scores, ticket volume and team performance. Beautiful charts, real-time insights.",
+      icon: MessageCircle,
+      title: "Slack Notifications",
+      description: "Receive instant Slack notifications whenever a new ticket is created or assigned.",
       color: "from-rose-500 to-pink-600",
       glow: "shadow-rose-500/20",
     },
     {
-      icon: Lock,
-      title: "Secure Authentication",
-      description: "Enterprise-grade SSO, role-based access, audit logs. Your client data stays protected with AES-256 encryption.",
+      icon: Mail,
+      title: "Email Notifications",
+      description: "Keep clients informed with automatic email updates as tickets progress.",
       color: "from-indigo-500 to-purple-600",
       glow: "shadow-indigo-500/20",
     },
@@ -612,7 +639,7 @@ function AgenciesSection() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-            Built for Agencies
+            One Dashboard for Every Client
           </h2>
           <p className="text-slate-400 text-lg">One workspace. Multiple clients. Complete control.</p>
         </motion.div>
@@ -646,10 +673,10 @@ function AgenciesSection() {
             {/* Client Companies */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full">
               {[
-                { name: "RDT", tickets: "12 open", color: "from-orange-500 to-amber-500" },
-                { name: "BigBadBikes", tickets: "8 open", color: "from-emerald-500 to-teal-500" },
-                { name: "Aesthetix", tickets: "5 open", color: "from-pink-500 to-rose-500" },
-                { name: "NextWealth", tickets: "3 open", color: "from-blue-500 to-cyan-500" },
+                { name: "BigBadBikes", tickets: "12 open", color: "from-orange-500 to-amber-500" },
+                { name: "Ashoka", tickets: "8 open", color: "from-emerald-500 to-teal-500" },
+                { name: "Zell Education", tickets: "5 open", color: "from-pink-500 to-rose-500" },
+                { name: "NamanHR", tickets: "3 open", color: "from-blue-500 to-cyan-500" },
               ].map((company, i) => (
                 <motion.div
                   key={company.name}
@@ -670,7 +697,7 @@ function AgenciesSection() {
             </div>
 
             <p className="text-slate-500 text-sm mt-10 max-w-md text-center">
-              Each company has separate tickets, contacts and branding while the agency manages everything from one unified workspace.
+              Each company has separate tickets and contacts while the agency manages everything from one unified workspace.
             </p>
           </div>
         </motion.div>

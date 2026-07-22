@@ -1,0 +1,302 @@
+/* Presentation-only styles for the signup screen.
+ *
+ * Framer Motion handles entrance + pointer parallax; everything here is the
+ * ambient stuff that should keep looping without JS — gradients, glows and
+ * the small life-signs in the illustration (blink, breathe, steam).
+ *
+ * SVG groups need `transform-box: fill-box` for keyword transform-origins to
+ * resolve against the shape rather than the whole canvas.
+ */
+
+/* ================= Hero backdrop ================= */
+
+/* Deep indigo → purple → cyan wash, drifting slowly. */
+.ps-aurora {
+  background:
+    radial-gradient(ellipse 55% 45% at 22% 32%, rgba(124, 58, 237, 0.42) 0%, transparent 62%),
+    radial-gradient(ellipse 45% 40% at 78% 22%, rgba(79, 70, 229, 0.40) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 45% at 62% 78%, rgba(6, 182, 212, 0.26) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 28% 82%, rgba(236, 72, 153, 0.16) 0%, transparent 60%);
+  animation: ps-aurora 18s ease-in-out infinite alternate;
+}
+@keyframes ps-aurora {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(24px, -18px, 0) scale(1.06); }
+  100% { transform: translate3d(-16px, 20px, 0) scale(0.97); }
+}
+
+.ps-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Two soft light rays raking across the panel. */
+.ps-rays {
+  background:
+    linear-gradient(102deg, transparent 34%, rgba(167, 139, 250, 0.09) 42%, transparent 50%),
+    linear-gradient(84deg, transparent 58%, rgba(103, 232, 249, 0.07) 65%, transparent 72%);
+  animation: ps-rays 14s ease-in-out infinite alternate;
+}
+@keyframes ps-rays {
+  0% { opacity: 0.5; transform: translateX(-2%); }
+  100% { opacity: 0.95; transform: translateX(2%); }
+}
+
+/* ================= Particles ================= */
+
+.ps-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  animation: ps-particle linear infinite;
+}
+.ps-particle:nth-child(1)  { width: 3px; height: 3px; left: 8%;  top: 24%; animation-duration: 26s; animation-delay: 0s;   }
+.ps-particle:nth-child(2)  { width: 4px; height: 4px; left: 22%; top: 68%; animation-duration: 31s; animation-delay: 3s;   background: rgba(167,139,250,0.6); }
+.ps-particle:nth-child(3)  { width: 2px; height: 2px; left: 34%; top: 36%; animation-duration: 22s; animation-delay: 6s;   background: rgba(103,232,249,0.6); }
+.ps-particle:nth-child(4)  { width: 5px; height: 5px; left: 48%; top: 78%; animation-duration: 29s; animation-delay: 1.5s; background: rgba(129,140,248,0.45); }
+.ps-particle:nth-child(5)  { width: 3px; height: 3px; left: 62%; top: 44%; animation-duration: 34s; animation-delay: 4s;   background: rgba(244,114,182,0.35); }
+.ps-particle:nth-child(6)  { width: 4px; height: 4px; left: 78%; top: 82%; animation-duration: 20s; animation-delay: 7s;   }
+.ps-particle:nth-child(7)  { width: 5px; height: 5px; left: 14%; top: 88%; animation-duration: 28s; animation-delay: 2s;   background: rgba(103,232,249,0.45); }
+.ps-particle:nth-child(8)  { width: 2px; height: 2px; left: 56%; top: 18%; animation-duration: 24s; animation-delay: 5s;   }
+.ps-particle:nth-child(9)  { width: 3px; height: 3px; left: 42%; top: 56%; animation-duration: 27s; animation-delay: 1s;   background: rgba(167,139,250,0.55); }
+.ps-particle:nth-child(10) { width: 4px; height: 4px; left: 86%; top: 30%; animation-duration: 21s; animation-delay: 3.5s; background: rgba(129,140,248,0.4); }
+.ps-particle:nth-child(11) { width: 2px; height: 2px; left: 4%;  top: 52%; animation-duration: 30s; animation-delay: 8s;   }
+.ps-particle:nth-child(12) { width: 4px; height: 4px; left: 92%; top: 60%; animation-duration: 33s; animation-delay: 2.5s; background: rgba(244,114,182,0.35); }
+.ps-particle:nth-child(13) { width: 3px; height: 3px; left: 70%; top: 8%;  animation-duration: 25s; animation-delay: 6.5s; background: rgba(103,232,249,0.5); }
+.ps-particle:nth-child(14) { width: 2px; height: 2px; left: 30%; top: 12%; animation-duration: 23s; animation-delay: 4.5s; }
+
+@keyframes ps-particle {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { transform: translateY(-115vh) translateX(50px) scale(0.4); opacity: 0; }
+}
+
+/* ================= Logo + orbs ================= */
+
+.ps-logo-glow {
+  box-shadow: 0 0 22px rgba(139, 92, 246, 0.45), 0 0 44px rgba(6, 182, 212, 0.22);
+  animation: ps-logo-glow 3.2s ease-in-out infinite alternate;
+}
+@keyframes ps-logo-glow {
+  0% { box-shadow: 0 0 22px rgba(139, 92, 246, 0.45), 0 0 44px rgba(6, 182, 212, 0.22); }
+  100% { box-shadow: 0 0 34px rgba(139, 92, 246, 0.65), 0 0 66px rgba(6, 182, 212, 0.34); }
+}
+
+.ps-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  pointer-events: none;
+  animation: ps-orb 9s ease-in-out infinite alternate;
+}
+@keyframes ps-orb {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.55; }
+  100% { transform: scale(1.28) translate(18px, -14px); opacity: 0.85; }
+}
+
+/* ================= Floating feature cards ================= */
+
+/* Three drift patterns so the six cards never sync up. */
+.ps-float-a { display: inline-flex; animation: ps-float-a 7s ease-in-out infinite; }
+.ps-float-b { display: inline-flex; animation: ps-float-b 8.5s ease-in-out infinite; }
+.ps-float-c { display: inline-flex; animation: ps-float-c 9.5s ease-in-out infinite; }
+
+@keyframes ps-float-a {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(4px, -11px); }
+}
+@keyframes ps-float-b {
+  0%, 100% { transform: translate(0, 0); }
+  40% { transform: translate(-6px, -8px); }
+  75% { transform: translate(3px, -13px); }
+}
+@keyframes ps-float-c {
+  0%, 100% { transform: translate(0, 0); }
+  35% { transform: translate(5px, -6px); }
+  70% { transform: translate(-4px, -12px); }
+}
+
+/* ================= Headline ================= */
+
+.ps-headline {
+  background: linear-gradient(135deg, #ffffff 0%, #ddd6fe 45%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ================= Illustration life-signs ================= */
+
+.ps-blink,
+.ps-breathe,
+.ps-head,
+.ps-sway,
+.ps-hand-l,
+.ps-hand-r,
+.ps-panel,
+.ps-twinkle,
+.ps-steam {
+  transform-box: fill-box;
+}
+
+/* Eyes stay open most of the cycle, then snap shut briefly. */
+.ps-blink {
+  transform-origin: center;
+  animation: ps-blink 5.4s ease-in-out infinite;
+}
+@keyframes ps-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94.5% { transform: scaleY(0.08); }
+  97% { transform: scaleY(1); }
+}
+
+/* Torso rises and falls — the breath. */
+.ps-breathe {
+  transform-origin: center bottom;
+  animation: ps-breathe 4.6s ease-in-out infinite;
+}
+@keyframes ps-breathe {
+  0%, 100% { transform: scaleY(1) translateY(0); }
+  50% { transform: scaleY(1.012) translateY(-1.6px); }
+}
+
+/* Head drifts on a longer, offset cycle so it never mirrors the breath. */
+.ps-head {
+  transform-origin: center bottom;
+  animation: ps-head 11s ease-in-out infinite;
+}
+@keyframes ps-head {
+  0%, 100% { transform: rotate(0deg) translate(0, 0); }
+  22% { transform: rotate(1.1deg) translate(1px, -1px); }
+  55% { transform: rotate(-0.9deg) translate(-1px, 0.5px); }
+  78% { transform: rotate(0.5deg) translate(0.5px, -0.5px); }
+}
+
+/* Hands tap the keyboard, slightly out of phase with each other. */
+.ps-hand-l {
+  transform-origin: center;
+  animation: ps-type 1.7s ease-in-out infinite;
+}
+.ps-hand-r {
+  transform-origin: center;
+  animation: ps-type 1.7s ease-in-out infinite;
+  animation-delay: 0.42s;
+}
+@keyframes ps-type {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  35% { transform: translateY(-2.2px) rotate(-0.8deg); }
+  70% { transform: translateY(0.8px) rotate(0.4deg); }
+}
+
+/* Plant leaves. */
+.ps-sway { animation: ps-sway 7.5s ease-in-out infinite; }
+@keyframes ps-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(1.6deg); }
+}
+
+/* Glass panels bob independently of the artwork. */
+.ps-panel { animation: ps-panel 6.5s ease-in-out infinite; }
+.ps-panel-2 { animation-duration: 8s; animation-delay: 1.6s; }
+@keyframes ps-panel {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.ps-twinkle { animation: ps-twinkle 3.6s ease-in-out infinite; transform-origin: center; }
+.ps-twinkle-2 { animation-delay: 1.2s; }
+.ps-twinkle-3 { animation-delay: 2.1s; }
+.ps-twinkle-4 { animation-delay: 0.6s; }
+@keyframes ps-twinkle {
+  0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1) rotate(180deg); opacity: 1; }
+}
+
+.ps-steam { animation: ps-steam 4s ease-in-out infinite; transform-origin: bottom center; }
+.ps-steam-2 { animation-delay: 1.3s; }
+@keyframes ps-steam {
+  0% { opacity: 0; transform: translateY(4px) scaleX(1); }
+  35% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-9px) scaleX(1.25); }
+}
+
+/* ================= Form ================= */
+
+.ps-input {
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+.ps-input:hover:not(:focus) {
+  border-color: #CBD5E1;
+}
+.ps-input:focus {
+  border-color: #4F46E5;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14);
+}
+/* Flag a field only after the user has typed something invalid AND moved on —
+ * never mid-keystroke, which would redden a half-typed email address. */
+.ps-input:not(:placeholder-shown):not(:focus):invalid {
+  border-color: #FDA4AF;
+  background-color: #FFF7F8;
+}
+
+.ps-error { animation: ps-shake 0.35s ease; }
+@keyframes ps-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Gradient submit button, with a sheen that sweeps across on hover. */
+.ps-cta {
+  background-image: linear-gradient(120deg, #4F46E5 0%, #7C3AED 50%, #4F46E5 100%);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  box-shadow: 0 8px 20px -6px rgba(79, 70, 229, 0.55), 0 2px 6px -1px rgba(15, 23, 42, 0.12);
+  transition: background-position 500ms ease, box-shadow 250ms ease, transform 200ms ease;
+}
+.ps-cta:hover:not(:disabled) {
+  background-position: 100% 50%;
+  box-shadow: 0 14px 28px -8px rgba(79, 70, 229, 0.6), 0 4px 10px -2px rgba(15, 23, 42, 0.14);
+  transform: translateY(-2px);
+}
+.ps-cta:active:not(:disabled) { transform: translateY(0) scale(0.99); }
+.ps-cta:disabled { opacity: 0.75; cursor: not-allowed; }
+
+.ps-spinner {
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: ps-spin 0.75s linear infinite;
+}
+@keyframes ps-spin { to { transform: rotate(360deg); } }
+
+/* Success flourish once the action resolves. */
+.ps-success { animation: ps-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes ps-pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Right-panel entrance. */
+.ps-rise { animation: ps-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes ps-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= Reduced motion ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-aurora, .ps-rays, .ps-particle, .ps-logo-glow, .ps-orb,
+  .ps-float-a, .ps-float-b, .ps-float-c,
+  .ps-blink, .ps-breathe, .ps-head, .ps-sway,
+  .ps-hand-l, .ps-hand-r, .ps-panel, .ps-twinkle, .ps-steam,
+  .ps-success, .ps-rise {
+    animation: none !important;
+  }
+  .ps-cta:hover:not(:disabled) { transform: none; }
+}

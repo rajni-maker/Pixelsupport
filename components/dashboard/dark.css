@@ -1,0 +1,245 @@
+/* Presentation-only styles shared by the dark signed-in screens (dashboard,
+ * tickets, and whatever follows).
+ *
+ * Ported from dashboard.html / tickets.html. Everything here is ambient or
+ * stateful CSS that Tailwind utilities can't express cleanly — the fixed
+ * background glows, the gradient rail that fades in on card hover, the
+ * staggered entrance, and the select chevron.
+ *
+ * Palette matches the signup hero so the screens read as one product:
+ * deep indigo surfaces, violet → cyan accent.
+ */
+
+/* ================= Page backdrop ================= */
+
+/* Two fixed corner washes, behind everything. Fixed (not absolute) so they
+ * stay put while the page scrolls, exactly as in the mockup. */
+.psd-shell::before,
+.psd-shell::after {
+  content: "";
+  position: fixed;
+  width: 50%;
+  height: 60%;
+  pointer-events: none;
+  z-index: 0;
+}
+.psd-shell::before {
+  top: -20%;
+  left: -10%;
+  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+}
+.psd-shell::after {
+  bottom: -20%;
+  right: -10%;
+  background: radial-gradient(ellipse, rgba(6, 182, 212, 0.05) 0%, transparent 70%);
+}
+
+/* ================= Cards ================= */
+
+/* Shared hover treatment: lift, brighter border, and a violet rail that wipes
+ * in along the top edge. */
+.psd-card {
+  transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+  position: relative;
+  overflow: hidden;
+}
+.psd-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #8b5cf6, transparent);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.psd-card:hover::before { opacity: 1; }
+.psd-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Action cards lift a little further — they're the primary targets. */
+.psd-action:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Arrow chip fills with the accent gradient when its card is hovered. */
+.psd-action:hover .psd-arrow {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+}
+.psd-action:hover .psd-arrow svg { color: #fff; }
+
+/* Panels that shouldn't lift (chart, activity) — border brighten only. */
+.psd-panel {
+  transition: border-color 300ms ease;
+}
+.psd-panel:hover { border-color: rgba(255, 255, 255, 0.12); }
+
+/* ================= Headline ================= */
+
+.psd-title {
+  background: linear-gradient(135deg, #f0f0f5, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ================= Entrance ================= */
+
+.psd-in {
+  animation: psd-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes psd-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Stagger by section; set with an inline --psd-delay on the element. */
+.psd-in { animation-delay: var(--psd-delay, 0s); }
+
+/* Chart line draws itself on load. */
+.psd-spark {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: psd-draw 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+}
+@keyframes psd-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* AI panel — violet→cyan wash rather than a flat surface, so the generated
+ * content is visibly distinct from what a human wrote. */
+.psd-ai {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.08),
+    rgba(6, 182, 212, 0.04)
+  );
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+.psd-ai:hover {
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 0 32px rgba(139, 92, 246, 0.08);
+}
+
+/* ================= Form controls ================= */
+
+/* Native selects can't be styled per-option reliably, so we strip the system
+ * chevron and paint our own. `option` needs an explicit background or Windows
+ * renders the open list white-on-white against the dark field. */
+.psd-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b6b8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.psd-select:hover,
+.psd-select:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+.psd-select option {
+  background: #11112a;
+  color: #f0f0f5;
+}
+
+/* Text inputs on the dark surfaces — same focus ring language as the select. */
+.psd-input {
+  transition: border-color 200ms ease, box-shadow 200ms ease,
+    background-color 200ms ease;
+}
+.psd-input:hover:not(:focus) {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.psd-input:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Button spinner, matching the one on the auth screens. */
+.psd-spinner {
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: psd-spin 0.75s linear infinite;
+}
+@keyframes psd-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* For spinners sitting on a light button, where white-on-white would vanish. */
+.psd-spinner-dark {
+  border-color: rgba(10, 10, 26, 0.25);
+  border-top-color: #0a0a1a;
+}
+/* On ghost buttons and accent-tinted buttons, match the surrounding text. */
+.psd-spinner-muted {
+  border-color: rgba(160, 160, 184, 0.25);
+  border-top-color: #a0a0b8;
+}
+.psd-spinner-accent {
+  border-color: rgba(167, 139, 250, 0.3);
+  border-top-color: #a78bfa;
+}
+
+/* ================= Table ================= */
+
+.psd-row {
+  transition: background-color 200ms ease;
+}
+.psd-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Below the table breakpoint each row becomes a stacked card and every cell
+ * grows its own label, taken from `data-label`. */
+@media (max-width: 768px) {
+  .psd-table thead { display: none; }
+  .psd-table tbody tr {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+  }
+  .psd-table td {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+  }
+  .psd-table td::before {
+    content: attr(data-label);
+    min-width: 80px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #6b6b8a;
+  }
+}
+
+/* ================= Scrollbar ================= */
+
+.psd-shell ::-webkit-scrollbar { width: 6px; }
+.psd-shell ::-webkit-scrollbar-track { background: transparent; }
+.psd-shell ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+.psd-shell ::-webkit-scrollbar-thumb:hover { background: #6b6b8a; }
+
+/* ================= Reduced motion ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .psd-in, .psd-spark { animation: none; }
+  .psd-spinner { animation-duration: 1.5s; }
+  .psd-spark { stroke-dashoffset: 0; }
+  .psd-card:hover, .psd-action:hover { transform: none; }
+}

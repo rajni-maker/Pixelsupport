@@ -27,7 +27,13 @@ export default function StatusControl({
       >
         Status
       </label>
+      {/* Uncontrolled so the user can browse options before committing, but
+          keyed on the server value: `defaultValue` is only applied on mount, so
+          without this the dropdown keeps showing the old status after the
+          status changes elsewhere (an AI suggestion applied, or an automatic
+          move on reply). Re-keying remounts it with the new value. */}
       <select
+        key={current}
         id="status"
         name="status"
         defaultValue={current}

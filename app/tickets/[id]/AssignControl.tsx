@@ -30,7 +30,10 @@ export default function AssignControl({
       >
         Assigned to
       </label>
+      {/* Keyed on the server value for the same reason as StatusControl —
+          `defaultValue` alone would leave a stale assignee on screen. */}
       <select
+        key={current ?? "unassigned"}
         id="agentId"
         name="agentId"
         defaultValue={current ?? ""}

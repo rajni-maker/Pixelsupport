@@ -297,7 +297,7 @@ function HeroSection() {
                 <Building2 className="w-5 h-5 text-white" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">Ashoka University</p>
+                <p className="text-sm font-semibold text-white">Ashoka</p>
                 <p className="text-xs text-slate-400">12 tickets</p>
               </div>
             </div>
@@ -333,7 +333,7 @@ function HeroSection() {
                 <Building2 className="w-5 h-5 text-white" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">NextWealth</p>
+                <p className="text-sm font-semibold text-white">Zell Education</p>
                 <p className="text-xs text-slate-400">3 tickets</p>
               </div>
             </div>
@@ -714,7 +714,8 @@ function DashboardPreviewSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
   return (
-    <section className="py-32 relative overflow-hidden">
+    // id="demo" is the target of the "Book Demo" buttons in the hero and CTA.
+    <section id="demo" className="py-32 relative overflow-hidden scroll-mt-20">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-950/30 to-transparent" />
 
       <div className="max-w-6xl mx-auto px-6 relative">

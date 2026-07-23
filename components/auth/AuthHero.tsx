@@ -11,6 +11,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import Link from "next/link";
 import HeroIllustration from "./HeroIllustration";
 
 type Card = {
@@ -116,14 +117,17 @@ export default function AuthHero({
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-8 flex items-center gap-3"
+          className="mb-8"
         >
-          <span className="ps-logo-glow flex h-11 w-11 items-center justify-center rounded-[13px] bg-gradient-to-br from-[#7C3AED] to-[#06B6D4]">
-            <Sparkles className="h-5 w-5 text-white" strokeWidth={2.2} />
-          </span>
-          <span className="text-[25px] font-extrabold tracking-[-0.02em] text-white">
-            PixelSupport
-          </span>
+          {/* Wordmark is the way back to the marketing page from login/signup. */}
+          <Link href="/" className="flex items-center gap-3">
+            <span className="ps-logo-glow flex h-11 w-11 items-center justify-center rounded-[13px] bg-gradient-to-br from-[#7C3AED] to-[#06B6D4]">
+              <Sparkles className="h-5 w-5 text-white" strokeWidth={2.2} />
+            </span>
+            <span className="text-[25px] font-extrabold tracking-[-0.02em] text-white">
+              PixelSupport
+            </span>
+          </Link>
         </motion.div>
 
         {/* Illustration + floating cards */}

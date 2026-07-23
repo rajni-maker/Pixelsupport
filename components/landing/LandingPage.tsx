@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import {
   Building2,
@@ -149,6 +150,54 @@ function GlassCard({
         {children}
       </motion.div>
     </motion.div>
+  );
+}
+
+/* ───────────────────────────────────────────
+   TOP NAV
+   ─────────────────────────────────────────── */
+function TopNav({ loggedIn }: { loggedIn: boolean }) {
+  return (
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#0a0a1a]/70 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        {/* Brand doubles as the "back to landing" link from anywhere. */}
+        <Link href="/" className="flex items-center gap-2.5">
+          <span className="flex h-9 w-9 items-center justify-center rounded-[11px] bg-gradient-to-br from-purple-600 to-cyan-500 shadow-lg shadow-purple-500/25">
+            <Sparkles className="h-[18px] w-[18px] text-white" strokeWidth={2.2} />
+          </span>
+          <span className="text-[19px] font-bold tracking-tight text-white">
+            PixelSupport
+          </span>
+        </Link>
+
+        <div className="flex items-center gap-3">
+          {loggedIn ? (
+            <Link
+              href="/dashboard"
+              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/25"
+            >
+              Go to Dashboard
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="inline-flex rounded-xl px-4 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:text-white"
+              >
+                Log In
+              </Link>
+              <Link
+                href="/signup"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/25"
+              >
+                Start Free
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </header>
   );
 }
 
@@ -1010,10 +1059,11 @@ function Footer() {
 /* ───────────────────────────────────────────
    MAIN PAGE
    ─────────────────────────────────────────── */
-export default function LandingPage() {
+export default function LandingPage({ loggedIn = false }: { loggedIn?: boolean }) {
   return (
     <main className="bg-[#0a0a1a] text-white min-h-screen overflow-x-hidden">
       <ParticleField />
+      <TopNav loggedIn={loggedIn} />
       <HeroSection />
       <HowItWorksSection />
       <FeaturesSection />

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import {
   Building2,
-  Bot,
+  LayoutDashboard,
   Ticket,
   Users,
   ArrowRight,
@@ -319,23 +319,36 @@ function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Right: AI Command Center */}
+        {/* Right: Workspace hub — the client companies and capabilities below
+            orbit the PixelSupport workspace at the centre, not an AI bot. */}
         <motion.div
           style={{ x: springX, y: springY }}
           className="relative h-[600px] hidden lg:block"
         >
-          {/* Central AI Hub */}
+          {/* Central Workspace Hub */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <motion.div
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative"
+              className="relative flex flex-col items-center gap-3"
             >
-              <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-purple-600 to-violet-800 flex items-center justify-center shadow-2xl shadow-purple-500/30">
-                <Bot className="w-14 h-14 text-white" />
+              <div className="relative w-32 h-32 rounded-3xl bg-gradient-to-br from-purple-600 to-violet-800 flex items-center justify-center shadow-2xl shadow-purple-500/30">
+                <LayoutDashboard className="w-14 h-14 text-white" strokeWidth={1.75} />
+                {/* Glow ring — pulses on the platform itself */}
+                <div className="absolute inset-0 rounded-3xl border-2 border-purple-400/30 animate-ping" style={{ animationDuration: "3s" }} />
               </div>
-              {/* Glow ring */}
-              <div className="absolute inset-0 rounded-3xl border-2 border-purple-400/30 animate-ping" style={{ animationDuration: "3s" }} />
+              {/* Brand label so the centre reads as the PixelSupport workspace */}
+              <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-1.5 backdrop-blur-md shadow-lg shadow-purple-500/10">
+                <span className="flex h-5 w-5 items-center justify-center rounded-md bg-gradient-to-br from-purple-500 to-cyan-500">
+                  <Sparkles className="h-3 w-3 text-white" strokeWidth={2.4} />
+                </span>
+                <span className="text-[13px] font-semibold tracking-tight text-white">
+                  PixelSupport
+                </span>
+              </div>
+              <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-purple-300/70">
+                Workspace
+              </span>
             </motion.div>
           </div>
 

@@ -16,16 +16,17 @@ export default function HeroIllustration() {
     >
       <defs>
         <linearGradient id="ps-skin" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#F5C6A2" />
-          <stop offset="100%" stopColor="#DDA07A" />
+          <stop offset="0%" stopColor="#E3AC7C" />
+          <stop offset="100%" stopColor="#B87B4B" />
         </linearGradient>
         <linearGradient id="ps-hair" x1="20%" y1="0%" x2="80%" y2="100%">
-          <stop offset="0%" stopColor="#2A2136" />
-          <stop offset="100%" stopColor="#100B18" />
+          <stop offset="0%" stopColor="#2C211C" />
+          <stop offset="100%" stopColor="#0D0907" />
         </linearGradient>
-        <linearGradient id="ps-denim" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#5089C0" />
-          <stop offset="100%" stopColor="#2B5382" />
+        {/* Kurta: dusty rose with a deeper rose in the folds */}
+        <linearGradient id="ps-kurta" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#EFBCC8" />
+          <stop offset="100%" stopColor="#C9899F" />
         </linearGradient>
         <linearGradient id="ps-screen" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#1B2036" />
@@ -109,38 +110,55 @@ export default function HeroIllustration() {
 
       {/* ================= PERSON ================= */}
 
-      {/* Hair, back layer — long and wavy, falling past the shoulders */}
       <g className="ps-breathe" style={{ transformOrigin: "215px 330px" }}>
+        {/* Torso — pink embroidered kurta, read as flat blocks of colour */}
         <path
-          d="M167 150 Q160 100 185 82 Q205 66 232 68 Q262 70 278 92 Q292 112 286 152 Q294 200 288 250 Q284 286 272 306 L258 300 Q268 258 262 214 Q258 182 254 168 L176 168 Q170 190 166 220 Q160 262 170 302 L156 308 Q142 274 140 236 Q138 192 167 150 Z"
-          fill="url(#ps-hair)"
-        />
-
-        {/* Torso — denim collared shirt */}
-        <path
-          d="M182 214 Q166 224 158 248 Q148 282 146 330 L146 420 L286 420 L286 330 Q284 282 274 248 Q266 224 250 214 Z"
-          fill="url(#ps-denim)"
+          d="M182 214 Q166 224 158 248 Q148 282 146 330 L146 352 L286 352 L286 330 Q284 282 274 248 Q266 224 250 214 Z"
+          fill="url(#ps-kurta)"
         />
         <path
-          d="M182 214 Q166 224 158 248 Q148 282 146 330 L146 420 L286 420 L286 330 Q284 282 274 248 Q266 224 250 214 Z"
+          d="M182 214 Q166 224 158 248 Q148 282 146 330 L146 352 L286 352 L286 330 Q284 282 274 248 Q266 224 250 214 Z"
           fill="none"
-          stroke="rgba(255,255,255,0.12)"
+          stroke="rgba(120,58,84,0.22)"
           strokeWidth="1"
         />
-        {/* Collar */}
-        <path d="M196 212 L216 244 L200 258 L182 224 Z" fill="#3C6D9E" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-        <path d="M236 212 L216 244 L232 258 L250 224 Z" fill="#3C6D9E" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-        {/* Placket + buttons */}
-        <line x1="216" y1="248" x2="216" y2="418" stroke="rgba(255,255,255,0.16)" strokeWidth="1.5" strokeDasharray="5 4" />
-        <circle cx="216" cy="286" r="2.2" fill="rgba(255,255,255,0.4)" />
-        <circle cx="216" cy="330" r="2.2" fill="rgba(255,255,255,0.4)" />
+        {/* Rounded kurta neckline */}
+        <path d="M196 212 Q216 246 236 212 Q232 240 216 252 Q200 240 196 212 Z" fill="#C07E96" stroke="rgba(120,58,84,0.3)" strokeWidth="1" />
+        {/* Embroidered neckline band + placket motifs */}
+        <path d="M194 214 Q216 250 238 214" stroke="#F6DCE4" strokeWidth="2" fill="none" opacity="0.85" />
+        <path d="M198 222 Q216 250 234 222" stroke="#F6DCE4" strokeWidth="0.9" fill="none" opacity="0.55" />
+        <line x1="216" y1="258" x2="216" y2="350" stroke="#F6DCE4" strokeWidth="1.4" strokeDasharray="5 4" opacity="0.6" />
+        {/* Scattered flat-vector embroidery sprigs */}
+        <g fill="#F6DCE4" opacity="0.5">
+          <circle cx="196" cy="286" r="1.8" />
+          <circle cx="236" cy="300" r="1.8" />
+          <circle cx="184" cy="330" r="1.6" />
+          <circle cx="250" cy="270" r="1.6" />
+          <circle cx="204" cy="322" r="1.4" />
+          <circle cx="246" cy="336" r="1.4" />
+        </g>
+        <circle cx="216" cy="286" r="2.2" fill="#F6DCE4" opacity="0.75" />
+        <circle cx="216" cy="330" r="2.2" fill="#F6DCE4" opacity="0.75" />
         {/* Shoulder seams */}
-        <path d="M182 222 Q172 250 168 286" stroke="rgba(255,255,255,0.1)" strokeWidth="1.2" fill="none" />
-        <path d="M250 222 Q260 250 264 286" stroke="rgba(255,255,255,0.1)" strokeWidth="1.2" fill="none" />
+        <path d="M182 222 Q172 250 168 286" stroke="rgba(120,58,84,0.18)" strokeWidth="1.2" fill="none" />
+        <path d="M250 222 Q260 250 264 286" stroke="rgba(120,58,84,0.18)" strokeWidth="1.2" fill="none" />
 
         {/* Neck */}
         <path d="M202 186 L230 186 L232 220 Q216 230 200 220 Z" fill="url(#ps-skin)" />
         <path d="M202 200 Q216 214 230 200" fill="rgba(0,0,0,0.12)" />
+
+        {/* Hair — a blunt shoulder-length bob. Drawn after the torso so the
+            lengths sit ON the shoulders instead of disappearing behind them.
+            The notch between x196 and x236 lets the neck read through; the
+            face (drawn later, in the head group) covers the bar across the
+            top of that notch. */}
+        <path
+          d="M216 82 Q188 82 172 100 Q158 119 157 154 L157 222 Q157 233 167 233 L186 233 Q196 233 196 222 L196 170 L236 170 L236 222 Q236 233 246 233 L265 233 Q275 233 275 222 L275 154 Q274 119 260 100 Q244 82 216 82 Z"
+          fill="url(#ps-hair)"
+        />
+        {/* Blunt ends catch a little light */}
+        <path d="M161 227 L192 227" stroke="rgba(255,255,255,0.07)" strokeWidth="2" strokeLinecap="round" />
+        <path d="M240 227 L271 227" stroke="rgba(255,255,255,0.07)" strokeWidth="2" strokeLinecap="round" />
       </g>
 
       {/* ---------- Head (sways gently) ---------- */}
@@ -149,43 +167,91 @@ export default function HeroIllustration() {
         <ellipse cx="174" cy="152" rx="6" ry="9" fill="url(#ps-skin)" />
         <ellipse cx="258" cy="152" rx="6" ry="9" fill="url(#ps-skin)" />
 
-        {/* Face */}
-        <ellipse cx="216" cy="148" rx="42" ry="47" fill="url(#ps-skin)" />
-        <ellipse cx="216" cy="148" rx="42" ry="47" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+        {/* Earrings — small pink studs, just visible under the hair */}
+        <circle cx="175" cy="159" r="3.2" fill="#E8AEBE" stroke="rgba(120,58,84,0.35)" strokeWidth="0.6" />
+        <circle cx="257" cy="159" r="3.2" fill="#E8AEBE" stroke="rgba(120,58,84,0.35)" strokeWidth="0.6" />
 
-        {/* Hair, front — soft centre-left part with volume on top */}
+        {/* Face — adult oval: full at the cheekbones, tapering to a soft chin.
+            Occupies the same footprint the old circle did, so the headset,
+            ears and neck all still line up. */}
         <path
-          d="M174 152 Q168 104 194 86 Q214 72 238 78 Q266 86 274 118 Q278 136 274 152 Q272 130 264 116 Q248 100 224 104 Q202 106 188 122 Q178 134 174 152 Z"
+          d="M216 101 C239 101 257 118 258 143 C258 162 250 178 234 187 Q226 192 216 192 Q206 192 198 187 C182 178 174 162 174 143 C175 118 193 101 216 101 Z"
+          fill="url(#ps-skin)"
+        />
+        <path
+          d="M216 101 C239 101 257 118 258 143 C258 162 250 178 234 187 Q226 192 216 192 Q206 192 198 187 C182 178 174 162 174 143 C175 118 193 101 216 101 Z"
+          fill="none"
+          stroke="rgba(255,255,255,0.1)"
+          strokeWidth="1"
+        />
+        {/* Temple shading keeps the face from reading flat */}
+        <path d="M180 128 Q176 150 182 170" stroke="rgba(120,64,32,0.16)" strokeWidth="5" strokeLinecap="round" fill="none" />
+        <path d="M252 128 Q256 150 250 170" stroke="rgba(120,64,32,0.16)" strokeWidth="5" strokeLinecap="round" fill="none" />
+
+        {/* Hair, front — a deep side part: the weight sits on the wearer's
+            right and sweeps across the brow, which reads more grown-up than a
+            symmetrical centre part. */}
+        <path
+          d="M173 154 Q167 108 196 90 Q220 76 243 88 Q263 100 262 154 Q257 130 248 118 Q240 108 231 112 Q212 123 194 117 Q180 123 176 139 Q174 147 173 154 Z"
           fill="url(#ps-hair)"
         />
-        <path d="M196 96 Q216 84 240 92" stroke="rgba(255,255,255,0.12)" strokeWidth="1.2" fill="none" />
-        {/* Face-framing strands */}
-        <path d="M176 142 Q172 172 180 196" stroke="url(#ps-hair)" strokeWidth="8" strokeLinecap="round" fill="none" />
-        <path d="M272 142 Q278 174 268 198" stroke="url(#ps-hair)" strokeWidth="8" strokeLinecap="round" fill="none" />
+        {/* Sheen following the sweep, plus the part line itself */}
+        <path d="M236 86 Q226 92 222 104" stroke="rgba(255,255,255,0.10)" strokeWidth="1.1" fill="none" />
+        <path d="M230 100 Q210 112 190 110" stroke="rgba(255,255,255,0.07)" strokeWidth="1" fill="none" />
+        <path d="M244 100 Q252 116 254 136" stroke="rgba(255,255,255,0.06)" strokeWidth="1" fill="none" />
+        {/* No face-framing strands here — the bob silhouette behind the head
+            supplies the sides, and strands over it would break the blunt edge. */}
 
-        {/* Brows */}
-        <path d="M192 134 Q201 129 210 133" stroke="#1A1424" strokeWidth="2.4" strokeLinecap="round" fill="none" />
-        <path d="M224 133 Q233 129 242 134" stroke="#1A1424" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+        {/* Brows — set closer to the eye, straighter and lower than a young
+            face would carry them */}
+        <path d="M190 136 Q200 131 211 135" stroke="#2A1C14" strokeWidth="2.7" strokeLinecap="round" fill="none" />
+        <path d="M221 135 Q232 131 242 136" stroke="#2A1C14" strokeWidth="2.7" strokeLinecap="round" fill="none" />
 
-        {/* Eyes — the group scales flat to blink */}
-        <g className="ps-blink" style={{ transformOrigin: "216px 145px" }}>
-          <ellipse cx="201" cy="145" rx="6" ry="3.6" fill="#fff" opacity="0.92" />
-          <ellipse cx="233" cy="145" rx="6" ry="3.6" fill="#fff" opacity="0.92" />
-          <circle cx="201" cy="145" r="2.9" fill="#241C2E" />
-          <circle cx="233" cy="145" r="2.9" fill="#241C2E" />
-          <circle cx="202.2" cy="143.8" r="1.1" fill="#fff" />
-          <circle cx="234.2" cy="143.8" r="1.1" fill="#fff" />
+        {/* Eyes — narrower than before; wide round eyes read childlike.
+            The group scales flat to blink. */}
+        <g className="ps-blink" style={{ transformOrigin: "216px 146px" }}>
+          <ellipse cx="201" cy="146" rx="5.8" ry="3" fill="#fff" opacity="0.9" />
+          <ellipse cx="231" cy="146" rx="5.8" ry="3" fill="#fff" opacity="0.9" />
+          <circle cx="201" cy="146" r="2.5" fill="#3D2A1C" />
+          <circle cx="231" cy="146" r="2.5" fill="#3D2A1C" />
+          <circle cx="201" cy="146" r="1.2" fill="#150D08" />
+          <circle cx="231" cy="146" r="1.2" fill="#150D08" />
+          <circle cx="202" cy="144.9" r="0.9" fill="#fff" />
+          <circle cx="232" cy="144.9" r="0.9" fill="#fff" />
+          {/* Upper lash line, and a light lower lid crease */}
+          <path d="M195 144.4 Q201 141.4 207 144.4" stroke="#2A1C14" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+          <path d="M225 144.4 Q231 141.4 237 144.4" stroke="#2A1C14" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+          {/* Lower lids pushed up by the smile, plus the faintest crow's feet —
+              this is what makes the smile read as felt rather than posed */}
+          <path d="M196 149.6 Q201 148 206 149.6" stroke="rgba(120,64,32,0.34)" strokeWidth="0.9" strokeLinecap="round" fill="none" />
+          <path d="M226 149.6 Q231 148 236 149.6" stroke="rgba(120,64,32,0.34)" strokeWidth="0.9" strokeLinecap="round" fill="none" />
+          <path d="M191 143 L188 141" stroke="rgba(120,64,32,0.2)" strokeWidth="0.8" strokeLinecap="round" />
+          <path d="M191 147 L188 148" stroke="rgba(120,64,32,0.2)" strokeWidth="0.8" strokeLinecap="round" />
+          <path d="M241 143 L244 141" stroke="rgba(120,64,32,0.2)" strokeWidth="0.8" strokeLinecap="round" />
+          <path d="M241 147 L244 148" stroke="rgba(120,64,32,0.2)" strokeWidth="0.8" strokeLinecap="round" />
         </g>
 
-        {/* Nose */}
-        <path d="M216 150 Q213 161 217 164" stroke="rgba(90,50,30,0.35)" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+        {/* Nose — longer bridge reads adult rather than child */}
+        <path d="M216 147 Q212 159 217 163" stroke="rgba(90,50,30,0.38)" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+        <path d="M210 164 Q216 167 222 164" stroke="rgba(90,50,30,0.26)" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+        {/* Nose stud */}
+        <circle cx="209.5" cy="162" r="0.9" fill="#F3E3C8" opacity="0.9" />
 
-        {/* Smile */}
-        <path d="M203 172 Q216 182 229 172" stroke="#8C4A3C" strokeWidth="2.2" strokeLinecap="round" fill="none" />
-        <path d="M206 174 Q216 179 226 174" fill="rgba(255,255,255,0.5)" />
-        {/* Cheeks */}
-        <ellipse cx="193" cy="161" rx="7" ry="4.5" fill="#E88B72" opacity="0.28" />
-        <ellipse cx="240" cy="161" rx="7" ry="4.5" fill="#E88B72" opacity="0.28" />
+        {/* Smile — genuinely warm: corners lifted, a glimpse of teeth. Still
+            narrow enough to stay professional rather than a broad grin. */}
+        <path d="M204 172 Q216 184 228 172 Q216 176 204 172 Z" fill="#A85B6E" />
+        <path d="M206 173 Q216 178.5 226 173 Q216 175 206 173 Z" fill="#FFFFFF" opacity="0.92" />
+        <path d="M204 172 Q216 169 228 172" stroke="#8E5061" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+        {/* Corners turning up — the difference between polite and pleased */}
+        <path d="M203 172 Q204.5 169.5 207 169.5" stroke="#8E5061" strokeWidth="1.3" strokeLinecap="round" fill="none" />
+        <path d="M229 172 Q227.5 169.5 225 169.5" stroke="#8E5061" strokeWidth="1.3" strokeLinecap="round" fill="none" />
+        {/* Nasolabial hint — barely there; enough to age the face without
+            turning into hard parentheses around the mouth */}
+        <path d="M202 160 Q199 167 203 173" stroke="rgba(120,64,32,0.13)" strokeWidth="1" strokeLinecap="round" fill="none" />
+        <path d="M230 160 Q233 167 229 173" stroke="rgba(120,64,32,0.13)" strokeWidth="1" strokeLinecap="round" fill="none" />
+        {/* Cheeks lifted and warmed by the smile */}
+        <ellipse cx="191" cy="155" rx="9" ry="5.5" fill="#C2705C" opacity="0.16" />
+        <ellipse cx="241" cy="155" rx="9" ry="5.5" fill="#C2705C" opacity="0.16" />
 
         {/* ---------- Premium wireless headset ---------- */}
         <path d="M170 150 Q164 92 216 86 Q268 92 262 150" stroke="#2A2F3E" strokeWidth="5.5" strokeLinecap="round" fill="none" />
@@ -211,8 +277,11 @@ export default function HeroIllustration() {
       </g>
 
       {/* ---------- Arms reaching to the laptop ---------- */}
-      <path d="M166 268 Q142 300 150 330" stroke="url(#ps-denim)" strokeWidth="21" strokeLinecap="round" fill="none" />
-      <path d="M266 268 Q290 300 282 330" stroke="url(#ps-denim)" strokeWidth="21" strokeLinecap="round" fill="none" />
+      <path d="M166 268 Q142 300 150 330" stroke="url(#ps-kurta)" strokeWidth="21" strokeLinecap="round" fill="none" />
+      <path d="M266 268 Q290 300 282 330" stroke="url(#ps-kurta)" strokeWidth="21" strokeLinecap="round" fill="none" />
+      {/* Embroidered cuff bands */}
+      <path d="M143 322 Q150 327 158 322" stroke="#F6DCE4" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.6" />
+      <path d="M274 322 Q282 327 289 322" stroke="#F6DCE4" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.6" />
 
       {/* Hands — small independent typing motion */}
       <g className="ps-hand-l">
@@ -314,16 +383,9 @@ export default function HeroIllustration() {
           <animate attributeName="stroke-dashoffset" values="0;16" dur="1.1s" repeatCount="indefinite" />
         </path>
 
-        {/* Glass panel: AI drafting a reply */}
-        <g className="ps-panel">
-          <rect x="330" y="240" width="92" height="38" rx="8" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
-          <path d="M337 250 a2.5 2.5 0 0 0 3.7 3.7 3.7 3.7 0 1 1-3.7-3.7Z" fill="none" stroke="#C4B5FD" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
-          <text x="345" y="254" fill="rgba(255,255,255,0.8)" fontSize="6.5" fontWeight="600">AI Draft Reply</text>
-          <line x1="337" y1="262" x2="412" y2="262" stroke="rgba(255,255,255,0.32)" strokeWidth="1.3" strokeLinecap="round" />
-          <line x1="337" y1="268" x2="392" y2="268" stroke="rgba(255,255,255,0.18)" strokeWidth="1.3" strokeLinecap="round">
-            <animate attributeName="x2" values="337;392;392" dur="3.6s" repeatCount="indefinite" />
-          </line>
-        </g>
+        {/* The "AI Draft Reply" glass panel that used to sit here was removed:
+            the overlaid capability chip in AuthHero carries the same label and
+            landed directly on top of it. */}
 
         {/* Glass panel: resolution time */}
         <g className="ps-panel ps-panel-2">

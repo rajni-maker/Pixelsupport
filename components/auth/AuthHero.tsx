@@ -31,7 +31,8 @@ type Card = {
 export const SIGNUP_CARDS: Card[] = [
   { icon: Building2, label: "Organization Workspace", pos: "left-0 top-[6%]", delay: 0.5, float: "ps-float-a" },
   { icon: Ticket, label: "Smart Ticketing", pos: "right-0 top-[16%]", delay: 0.65, float: "ps-float-b" },
-  { icon: Sparkles, label: "AI Summary", pos: "-left-2 top-[42%]", delay: 0.8, float: "ps-float-c" },
+  // Kept clear of the "Avg resolve" glass panel drawn at ~42% inside the SVG.
+  { icon: Sparkles, label: "AI Summary", pos: "-left-2 top-[27%]", delay: 0.8, float: "ps-float-c" },
   { icon: PenLine, label: "AI Draft Reply", pos: "-right-2 top-[54%]", delay: 0.95, float: "ps-float-a" },
   { icon: UserRound, label: "Support Rep", pos: "left-[4%] bottom-[8%]", delay: 1.1, float: "ps-float-b" },
   { icon: Zap, label: "Faster Resolution", pos: "right-[4%] bottom-[2%]", delay: 1.25, float: "ps-float-c" },
@@ -39,13 +40,13 @@ export const SIGNUP_CARDS: Card[] = [
 
 export const LOGIN_CARDS: Card[] = [
   { icon: Ticket, label: "Smart Ticketing", pos: "right-0 top-[14%]", delay: 0.5, float: "ps-float-b" },
-  { icon: Sparkles, label: "AI Summary", pos: "-left-2 top-[34%]", delay: 0.65, float: "ps-float-c" },
+  { icon: Sparkles, label: "AI Summary", pos: "-left-2 top-[27%]", delay: 0.65, float: "ps-float-c" },
   { icon: PenLine, label: "AI Draft Reply", pos: "-right-2 top-[58%]", delay: 0.8, float: "ps-float-a" },
   { icon: Zap, label: "Faster Resolution", pos: "left-[4%] bottom-[8%]", delay: 0.95, float: "ps-float-b" },
 ];
 
 const TRUST = [
-  { icon: ShieldCheck, label: "SOC 2 aligned" },
+  { icon: ShieldCheck, label: "Secure authentication" },
   { icon: Sparkles, label: "AI with human approval" },
   { icon: Users, label: "Built for agencies" },
 ];

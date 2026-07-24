@@ -17,12 +17,6 @@ import AuthHero from "@/components/auth/AuthHero";
 import Field from "@/components/auth/AuthField";
 import "@/components/auth/auth.css";
 
-const TRUST_POINTS = [
-  "AI-powered support platform",
-  "Secure authentication",
-  "Built for agencies",
-];
-
 export default function SignupPage() {
   // useActionState wires the form to our server action and gives us back any
   // error message plus a "pending" flag while the request is in flight.
@@ -153,21 +147,6 @@ export default function SignupPage() {
               )}
             </button>
           </form>
-
-          {/* Trust points */}
-          <ul className="mt-6 space-y-2.5">
-            {TRUST_POINTS.map((point) => (
-              <li
-                key={point}
-                className="flex items-center gap-2.5 text-[13px] text-[#475569] dark:text-[#94A3B8]"
-              >
-                <span className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#ECFDF5] text-[#059669] dark:bg-[#052E22] dark:text-[#34D399]">
-                  <Check className="h-3 w-3" strokeWidth={3} />
-                </span>
-                {point}
-              </li>
-            ))}
-          </ul>
 
           <p className="mt-8 border-t border-[#E2E8F0] pt-6 text-center text-sm text-[#64748B] dark:border-[#1E293B] dark:text-[#94A3B8]">
             Already have an account?{" "}

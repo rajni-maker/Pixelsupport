@@ -23,6 +23,7 @@ import {
   STATUS_OPTIONS,
   STATUS_LABELS,
   autoStatusOnReply,
+  autoStatusOnAssign,
   type TicketPriority,
   type TicketStatus,
 } from "@/lib/tickets";
@@ -472,7 +473,7 @@ export async function assignTicket(
   // touch this ticket at all — if they can't see it, they can't assign it.
   const { data: before } = await supabase
     .from("tickets")
-    .select("assigned_agent_id, subject, organization_id")
+    .select("assigned_agent_id, subject, organization_id, status")
     .eq("id", ticketId)
     .single();
   if (!before) return { error: "Ticket not found." };
@@ -510,6 +511,30 @@ export async function assignTicket(
     .update({ assigned_agent_id: agentId || null })
     .eq("id", ticketId);
   if (error) return { error: error.message };
+
+  // Picking up a ticket starts the work, so move a still-open ticket to
+  // "in progress". The automatic acknowledgment reply never did this — it's
+  // inserted directly, not through addReply — so without this an assigned
+  // ticket would sit at "Open". Best-effort and logged like any transition;
+  // done through the admin client for the same reason the assignment is (after
+  // a hand-off the row may no longer be visible under the caller's policies).
+  const currentStatus = before.status as TicketStatus;
+  const autoStatus = autoStatusOnAssign(currentStatus, agentId || null);
+  if (autoStatus) {
+    const { error: moveError } = await admin
+      .from("tickets")
+      .update({ status: autoStatus })
+      .eq("id", ticketId);
+    if (!moveError) {
+      await clearSuggestedStatus(admin, ticketId);
+      await admin.from("ticket_status_history").insert({
+        ticket_id: ticketId,
+        old_status: currentStatus,
+        new_status: autoStatus,
+        changed_by: user.id,
+      });
+    }
+  }
 
   // Notify on a real assignment change only — never on a no-op re-save of the
   // same person, and never on unassignment.

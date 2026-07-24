@@ -112,6 +112,25 @@ export function autoStatusOnReply(
   // The client answered the question support was waiting for.
   return current === "waiting_on_client" ? "in_progress" : null;
 }
+
+/**
+ * The status a ticket should move to when it's assigned to a rep, or `null` to
+ * leave it as-is. Handing a ticket to someone is a promise that work is
+ * starting, so a still-*open* ticket becomes *in progress*. Everything else is
+ * left alone: a ticket already being worked, waiting on the client, in testing,
+ * or finished shouldn't be dragged backwards just because it changed hands.
+ * Unassigning (no agent) never moves the status either.
+ *
+ * @param current the ticket's status right now
+ * @param agentId the rep being assigned, or "" / null when unassigning
+ */
+export function autoStatusOnAssign(
+  current: TicketStatus,
+  agentId: string | null,
+): TicketStatus | null {
+  if (!agentId) return null;
+  return current === "open" ? "in_progress" : null;
+}
 export function formatMinutes(total: number | null | undefined): string {
   const m = Math.max(0, Math.round(total ?? 0));
   const h = Math.floor(m / 60);

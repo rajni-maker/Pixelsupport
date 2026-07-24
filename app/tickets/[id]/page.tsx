@@ -72,7 +72,7 @@ export default async function TicketDetailPage({
         .single(),
       supabase
         .from("ticket_messages")
-        .select("id, body, sender_role, created_at, is_ai_drafted")
+        .select("id, body, sender_role, created_at")
         .eq("ticket_id", id)
         .order("created_at", { ascending: true }),
       supabase
@@ -305,12 +305,6 @@ export default async function TicketDetailPage({
                               <span className="text-[13px] font-semibold text-[#f0f0f5]">
                                 {who}
                               </span>
-                              {m.is_ai_drafted && (
-                                <span className="flex items-center gap-1 rounded-full bg-[#8b5cf6]/[0.12] px-2 py-0.5 text-[10px] font-semibold text-[#a78bfa]">
-                                  <Sparkles className="h-2.5 w-2.5" strokeWidth={2.4} />
-                                  AI drafted
-                                </span>
-                              )}
                             </div>
                             <span className="shrink-0 text-[11px] text-[#4a4a6a]">
                               {formatDateTime(m.created_at)}
